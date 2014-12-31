@@ -1,8 +1,8 @@
 use std::error::FromError;
 use std::io::{BufferedReader, File, IoError};
 
-use instructions;
-use functions;
+use instructions::{Opcode, Instruction};
+use functions::{Function};
 
 #[deriving(Show)]
 pub struct Program {
@@ -24,22 +24,23 @@ impl FromError<IoError> for ParseError {
 }
 
 pub fn parse_program(path: Path) -> Result<Program, ParseError> {
-  let mut program = Program{functions: vec![functions::Function{instructions: vec![]}]};
+  let mut program = Program{functions: vec![Function{instructions: vec![]}]};
   let mut file = BufferedReader::new(File::open(&path));
   for line in file.lines() {
     let line_unwrap = try!(line);
     if !line_unwrap.chars().all(|c| c.is_whitespace()) {
       let mut it = line_unwrap.split_str(" ").map(|s| s.trim());
       let opcode_it = try!(it.next().ok_or(ParseError::BadSplit));
-      let op = try!(instructions::parse_opcode(opcode_it).ok_or(ParseError::BadOpcode));
+      let op = try!(Opcode::parse(opcode_it).ok_or(ParseError::BadOpcode));
       let arg_it = try!(it.next().ok_or(ParseError::BadSplit));
       let arg = try!(arg_it.parse::<int>().ok_or(ParseError::BadInt));
 
-      let new_instruction = ::instructions::Instruction{op: op, arg: arg};
+      let new_instruction = Instruction{op: op, arg: arg};
+
       let size = program.functions.len() - 1;
       program.functions[size].instructions.push(new_instruction);
     } else {
-      program.functions.push(::functions::Function{instructions: vec![]});
+      program.functions.push(Function{instructions: vec![]});
     }
   }
 
