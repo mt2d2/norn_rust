@@ -1,8 +1,6 @@
-mod instructions;
-mod functions;
-mod programs;
+mod vm;
 
 fn main() {
-  let program = programs::Program::parse_textual_bytecode(Path::new("test/fib.nornc")).unwrap();
+  let program = vm::ir::Program::parse_textual_bytecode(Path::new("test/fib.nornc")).unwrap();
   println!("{}", program);
 }

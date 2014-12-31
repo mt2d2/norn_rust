@@ -2,12 +2,12 @@ use std::collections::HashMap;
 use std::error::FromError;
 use std::io::{BufferedReader, File, IoError};
 
-use instructions::{Opcode, Instruction};
-use functions::{Function};
+use vm::ir::instructions::{Opcode, Instruction};
+use vm::ir::functions::{Function};
 
 #[deriving(Show)]
 pub struct Program {
-  pub functions: Vec<::functions::Function>,
+  pub functions: Vec<Function>,
 }
 
 impl Program {
