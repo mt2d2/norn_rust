@@ -3,3 +3,11 @@
 name = "norn_rust"
 version = "0.0.1"
 authors = ["Michael Tremel <itrekkie@gmail.com>"]
+
+
+# The release profile, used for `cargo build --release`
+[profile.release]
+opt-level = 3
+debug = true
+rpath = false
+lto = false
