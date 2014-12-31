@@ -19,7 +19,6 @@ pub enum Opcode {
   Label,
 }
 
-
 impl Opcode {
   pub fn parse(string: &str) -> Option<Opcode> {
     match string {
@@ -42,6 +41,13 @@ impl Opcode {
       "LABEL" => Some(Opcode::Label),
 
       _ => None
+    }
+  }
+
+  pub fn is_jmp(&self) -> bool {
+    match *self {
+      Opcode::Tjmp | Opcode::Fjmp | Opcode::Ujmp => true,
+      _ => false,
     }
   }
 }
