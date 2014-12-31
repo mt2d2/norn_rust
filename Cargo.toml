@@ -1,0 +1,5 @@
+[package]
+
+name = "norn_rust"
+version = "0.0.1"
+authors = ["Michael Tremel <itrekkie@gmail.com>"]
