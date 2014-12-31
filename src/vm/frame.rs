@@ -3,7 +3,7 @@ use vm::ir::Function;
 pub struct Frame<'a> {
   pub function: &'a Function,
   pub ip: uint,
-  pub memory: Vec<int>,
+  pub memory: [int,..1],
 }
 
 impl<'a> Frame<'a> {
@@ -11,7 +11,7 @@ impl<'a> Frame<'a> {
     Frame{
       function: function,
       ip: 0,
-      memory: vec![0], // TODO you know the memory size required
+      memory: [0], // TODO you know the memory size required
     }
   }
 }
