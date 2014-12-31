@@ -10,7 +10,7 @@ pub fn execute(program: &Program) {
   let mut frames = Vec::with_capacity(256);
   let mut frame = &mut Frame::new(main);
 
-  let mut stack = Vec::with_capacity(1024);
+  let mut stack = Vec::with_capacity(256);
 
   loop {
     let ref instr = frame.function.instructions[frame.ip];
