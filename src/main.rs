@@ -3,9 +3,6 @@ mod functions;
 mod programs;
 
 fn main() {
-  let op = instructions::Instruction{op: instructions::Opcode::LitInt, arg: 0};
-  let func = functions::Function{instructions: vec![op]};
-  let program = programs::Program{functions: vec![func]};
-
-  println!("Program!: {}", program)
+  let program = programs::parse_program(Path::new("fib.nornc")).unwrap();
+  println!("{}", program);
 }
