@@ -10,4 +10,4 @@ authors = ["Michael Tremel <itrekkie@gmail.com>"]
 opt-level = 3
 debug = true
 rpath = false
-lto = false
+lto = true
