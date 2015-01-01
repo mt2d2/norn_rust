@@ -13,7 +13,7 @@ pub fn execute(program: &Program) {
   let mut stack = Vec::with_capacity(256);
 
   loop {
-    let ref instr = frame.function.instructions[frame.ip];
+    let instr = &frame.function.instructions[frame.ip];
     frame.ip += 1;
 
     match instr.op {
