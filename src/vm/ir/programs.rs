@@ -55,7 +55,6 @@ impl Program {
   }
 }
 
-
 #[deriving(Show)]
 enum ParseError {
   Io(IoError),
