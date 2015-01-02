@@ -3,7 +3,7 @@ use std::error::FromError;
 use std::io::{BufferedReader, File, IoError};
 
 use vm::ir::instructions::{Opcode, Instruction};
-use vm::ir::functions::{Function};
+use vm::ir::functions::Function;
 
 #[deriving(Show)]
 pub struct Program {
