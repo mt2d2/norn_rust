@@ -12,7 +12,7 @@ mod tests {
   use test::Bencher;
 
   #[bench]
-  fn bench_add_two(b: &mut Bencher) {
+  fn bench_interpret_fib(b: &mut Bencher) {
     let program = ::vm::ir::Program::parse_textual_bytecode(Path::new("test/fib.nornc")).unwrap();
     b.iter(|| ::vm::execute(&program));
   }
