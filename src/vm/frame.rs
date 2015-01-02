@@ -1,9 +1,10 @@
 use vm::ir::Function;
+use vm;
 
 pub struct Frame<'a> {
   pub function: &'a Function,
   pub ip: uint,
-  pub memory: [int,..1],
+  pub memory: [vm::Value,..1],
 }
 
 impl<'a> Frame<'a> {

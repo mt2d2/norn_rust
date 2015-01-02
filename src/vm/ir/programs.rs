@@ -4,6 +4,7 @@ use std::io::{BufferedReader, File, IoError};
 
 use vm::ir::instructions::{Opcode, Instruction};
 use vm::ir::functions::Function;
+use vm;
 
 #[deriving(Show)]
 pub struct Program {
@@ -25,7 +26,7 @@ impl Program {
         let opcode_it = try!(it.next().ok_or(ParseError::BadSplit));
         let op = try!(Opcode::parse(opcode_it).ok_or(ParseError::BadOpcode));
         let arg_it = try!(it.next().ok_or(ParseError::BadSplit));
-        let arg = try!(arg_it.parse::<int>().ok_or(ParseError::BadInt));
+        let arg = try!(arg_it.parse::<vm::Value>().ok_or(ParseError::BadInt));
 
         match op {
           Opcode::Label => {
@@ -41,7 +42,7 @@ impl Program {
         // before moving onto a new function, normalize any instructions jump target
         for instruction in program.functions.last_mut().unwrap().instructions.iter_mut() {
           if instruction.op.is_jmp() {
-            instruction.arg = jump_targets[instruction.arg] as int;
+            instruction.arg = jump_targets[instruction.arg] as vm::Value;
           }
         }
 
