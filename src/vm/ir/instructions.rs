@@ -1,6 +1,6 @@
 use vm;
 
-#[deriving(Show)]
+#[derive(Show)]
 pub enum Opcode {
   LitInt,
   LitChar,
@@ -54,7 +54,7 @@ impl Opcode {
   }
 }
 
-#[deriving(Show)]
+#[derive(Show)]
 pub struct Instruction {
   pub op: Opcode,
   pub arg: vm::Value,

@@ -1,6 +1,6 @@
 use vm::ir::instructions::Instruction;
 
-#[deriving(Show)]
+#[derive(Show)]
 pub struct Function {
   pub instructions: Vec<Instruction>,
 }
