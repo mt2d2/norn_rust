@@ -3,7 +3,7 @@ use vm;
 
 pub struct Frame<'a> {
   pub function: &'a Function,
-  pub ip: uint,
+  pub ip: usize,
   pub memory: [vm::Value; 1],
 }
 

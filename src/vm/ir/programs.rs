@@ -16,7 +16,7 @@ impl Program {
     let mut program = Program{functions: vec![Function{instructions: vec![]}]};
     let mut file = BufferedReader::new(File::open(&path));
 
-    let mut instruction_count = 0u;
+    let mut instruction_count = 0;
     let mut jump_targets = HashMap::new();
 
     for line in file.lines() {

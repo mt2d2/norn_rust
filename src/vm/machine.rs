@@ -26,19 +26,19 @@ pub fn execute(program: &Program) {
       },
 
       Opcode::StoreInt => {
-        frame.memory[instr.arg as uint] = stack.pop().unwrap();
+        frame.memory[instr.arg as usize] = stack.pop().unwrap();
       },
 
       Opcode::StoreChar => {
-        frame.memory[instr.arg as uint] = stack.pop().unwrap();
+        frame.memory[instr.arg as usize] = stack.pop().unwrap();
       },
 
       Opcode::LoadInt => {
-        stack.push(frame.memory[instr.arg as uint]);
+        stack.push(frame.memory[instr.arg as usize]);
       },
 
       Opcode::LoadChar => {
-        stack.push(frame.memory[instr.arg as uint]);
+        stack.push(frame.memory[instr.arg as usize]);
       },
 
       Opcode::PrintInt => {
@@ -69,22 +69,22 @@ pub fn execute(program: &Program) {
 
       Opcode::Tjmp => {
         if stack.pop().unwrap() == 1 {
-          frame.ip = instr.arg as uint;
+          frame.ip = instr.arg as usize;
         }
       },
 
       Opcode::Fjmp => {
         if stack.pop().unwrap() == 0 {
-          frame.ip = instr.arg as uint;
+          frame.ip = instr.arg as usize;
         }
       },
 
       Opcode::Ujmp => {
-        frame.ip = instr.arg as uint;
+        frame.ip = instr.arg as usize;
       },
 
       Opcode::Call => {
-        let mut nframe = Frame::new(&program.functions[instr.arg as uint]);
+        let mut nframe = Frame::new(&program.functions[instr.arg as usize]);
         mem::swap(frame, &mut nframe);
         frames.push(nframe);
       },
