@@ -6,7 +6,8 @@ use vm::ir::instructions::{Opcode, Instruction};
 use vm::ir::functions::Function;
 use vm;
 
-#[derive(Show)]
+#[derive(Debug)]
+
 pub struct Program {
   pub functions: Vec<Function>,
 }
@@ -56,7 +57,8 @@ impl Program {
   }
 }
 
-#[derive(Show)]
+#[derive(Debug)]
+
 enum ParseError {
   Io(IoError),
   BadSplit,
