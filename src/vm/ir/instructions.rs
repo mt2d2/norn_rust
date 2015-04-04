@@ -1,7 +1,6 @@
 use vm;
 
 #[derive(Debug)]
-
 pub enum Opcode {
   LitInt,
   LitChar,

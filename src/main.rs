@@ -1,30 +1,17 @@
-extern crate test;
-
-use std::os;
+use std::env;
+use std::path::Path;
 
 mod vm;
 
 fn main() {
-  let args = os::args();
-  let args_tail = args.tail();
-  if args_tail.len() != 1 {
+  let mut args = env::args();
+  if args.len() != 2 {
     println!("Usage: norn_rust file.nornc");
     return;
   }
 
-  let file = &args_tail[0];
+  let file = &args.nth(1).unwrap();
   let program = vm::ir::Program::parse_textual_bytecode(Path::new(file)).unwrap();
 
   vm::execute(&program);
-}
-
-#[cfg(test)]
-mod tests {
-  use test::Bencher;
-
-  #[bench]
-  fn bench_interpret_fib(b: &mut Bencher) {
-    let program = ::vm::ir::Program::parse_textual_bytecode(Path::new("test/fib.nornc")).unwrap();
-    b.iter(|| ::vm::execute(&program));
-  }
 }

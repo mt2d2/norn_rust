@@ -5,4 +5,4 @@ pub mod ir;
 pub mod frame;
 pub mod machine;
 
-type Value = i64;
+pub type Value = i64;
