@@ -21,6 +21,17 @@ pub enum ParseError {
     BadOpcode,
 }
 
+impl ToString for ParseError {
+    fn to_string(&self) -> String {
+        match *self {
+            ParseError::Io(_) => "io error".to_string(),
+            ParseError::BadSplit => "bad split".to_string(),
+            ParseError::BadInt => "bad int".to_string(),
+            ParseError::BadOpcode => "Bad opcode".to_string()
+        }
+    }
+}
+
 impl From<io::Error> for ParseError {
     fn from(err: io::Error) -> ParseError {
         ParseError::Io(err)

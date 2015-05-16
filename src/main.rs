@@ -11,17 +11,12 @@ fn main() {
         return;
     }
 
-    let path = &args.nth(1).unwrap();
-    let file = File::open(path).ok().expect("could not open file");
-    let program = vm::ir::programs::Program::parse_textual_bytecode(file);
-
-    match program  {
-        Ok(program) => vm::execute(&program),
-        Err(e) => match e {
-            vm::ir::programs::ParseError::Io(e)        => panic!("io error: {}", e),
-            vm::ir::programs::ParseError::BadSplit     => panic!("bad split detected"),
-            vm::ir::programs::ParseError::BadInt       => panic!("integer parse failed"),
-            vm::ir::programs::ParseError::BadOpcode    => panic!("unknown opcode encounted"),
-        }
-    }
+    File::open(args.nth(1).unwrap())
+        .map_err(|err| err.to_string())
+        .and_then(|file| {
+                vm::ir::programs::Program::parse_textual_bytecode(file)
+                .map_err(|err| err.to_string())
+            })
+        .and_then(|program| Ok(vm::execute(&program)))
+        .unwrap();
 }
