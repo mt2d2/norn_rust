@@ -1,7 +1,6 @@
 use std::env;
 use std::fs::File;
 
-
 mod vm;
 
 fn main() {
