@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::fmt;
 use std::io;
 use std::io::BufRead;
 
@@ -21,14 +22,9 @@ pub enum ParseError {
     BadOpcode,
 }
 
-impl ToString for ParseError {
-    fn to_string(&self) -> String {
-        match *self {
-            ParseError::Io(_) => "io error".to_string(),
-            ParseError::BadSplit => "bad split".to_string(),
-            ParseError::BadInt => "bad int".to_string(),
-            ParseError::BadOpcode => "Bad opcode".to_string()
-        }
+impl fmt::Display for ParseError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
     }
 }
 
