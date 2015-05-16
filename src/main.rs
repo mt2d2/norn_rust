@@ -1,5 +1,6 @@
 use std::env;
-use std::path::Path;
+use std::fs::File;
+
 
 mod vm;
 
@@ -10,8 +11,9 @@ fn main() {
         return;
     }
 
-    let file = &args.nth(1).unwrap();
-    let program = vm::ir::programs::Program::parse_textual_bytecode(Path::new(file));
+    let path = &args.nth(1).unwrap();
+    let file = File::open(path).ok().expect("could not open file");
+    let program = vm::ir::programs::Program::parse_textual_bytecode(file);
 
     match program  {
         Ok(program) => vm::execute(&program),

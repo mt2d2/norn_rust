@@ -1,6 +1,4 @@
 use std::collections::HashMap;
-use std::fs::File;
-use std::path::Path;
 use std::io;
 use std::io::BufRead;
 
@@ -36,10 +34,9 @@ impl From<num::ParseIntError> for ParseError {
 }
 
 impl Program {
-    pub fn parse_textual_bytecode(path: &Path) -> Result<Program, ParseError> {
+    pub fn parse_textual_bytecode<T: io::Read>(input: T) -> Result<Program, ParseError> {
         let mut program = Program{functions: vec![Function{instructions: vec![]}]};
-        let file = try!(File::open(path));
-        let file = io::BufReader::new(file);
+        let file = io::BufReader::new(input);
 
         let mut instruction_count = 0;
         let mut jump_targets = HashMap::new();
