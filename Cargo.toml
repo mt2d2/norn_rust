@@ -1,9 +1,11 @@
 [package]
-
 name = "norn_rust"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Michael Tremel <itrekkie@gmail.com>"]
 
+[dependencies]
+docopt = "*"
+rustc-serialize = "*"  # if you're using `derive(RustcDecodable)`
 
 # The release profile, used for `cargo build --release`
 [profile.release]
