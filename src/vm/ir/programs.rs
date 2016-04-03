@@ -71,14 +71,14 @@ impl Program {
             } else {
                 // before moving onto a new function, normalize any instructions jump target
                 for instruction in program.functions.last_mut().unwrap().instructions.iter_mut() {
-                if instruction.op.is_jmp() {
-                    instruction.arg = jump_targets[&instruction.arg] as vm::Value;
+                    if instruction.op.is_jmp() {
+                        instruction.arg = jump_targets[&instruction.arg] as vm::Value;
+                    }
                 }
-            }
 
-            instruction_count = 0;
-            jump_targets.clear();
-            program.functions.push(Function{instructions: vec![]});
+                instruction_count = 0;
+                jump_targets.clear();
+                program.functions.push(Function{instructions: vec![]});
             }
         }
 
